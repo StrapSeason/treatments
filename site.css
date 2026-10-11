@@ -1,0 +1,116 @@
+/* treat(ment)'s — 1:1 with Figma "Frame 17" (1920 × 5775).
+   Desktop: every layer sits at its Figma coordinates, 1 design px = --u.
+   Phones (≤ 760px): the same layers re-laid out at readable size. */
+
+:root { --u: calc(100cqw / 1920); --ox: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: #000; -webkit-text-size-adjust: 100%; }
+body { background: #000; color: #fff; overflow-x: hidden; min-height: 100vh; }
+a { color: inherit; text-decoration: none; }
+
+.page { position: relative; width: 100%; aspect-ratio: 1920 / 5775; container-type: inline-size; overflow: hidden; }
+
+.sec { position: absolute; left: 0; width: 100%; top: calc(var(--sy) * var(--u)); height: calc(var(--sh) * var(--u)); display: block; }
+.a {
+  position: absolute;
+  left: calc((var(--x) + var(--ox)) * var(--u));
+  top: calc(var(--y) * var(--u));
+  width: calc(var(--w) * var(--u));
+  height: calc(var(--h) * var(--u));
+}
+.t { color: #fff; display: block; }
+.a > svg { display: block; width: 100%; height: 100%; overflow: visible; }
+h1.a { font-size: inherit; font-weight: inherit; }
+
+.dot { border-radius: 50%; background: #fff; }
+.rect { background: #d9d9d9; }
+.slot { overflow: hidden; }
+/* lift the loops' pure black to a dark grey so every plate still reads as a rectangle, like the Figma's */
+.slot::after { content: ""; position: absolute; inset: 0; background: #1a1a1a; mix-blend-mode: lighten; pointer-events: none; }
+.slot video { display: block; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .6s ease; }
+.slot video.on { opacity: 1; }
+/* the logo sits over the loops: difference keeps it readable on both their black and their white */
+.logo { mix-blend-mode: difference; }
+svg.lines { display: block; overflow: visible; }
+
+.vlines { position: absolute; inset: 0; pointer-events: none; }
+.vlines svg { display: block; width: 100%; height: 100%; }
+
+.case { overflow: hidden; }
+.media { overflow: hidden; background: #111; }
+.media video, .media img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
+.bar { background: #000; }
+
+/* "click": a hairline draws under it on hover */
+.k-click::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -28%; height: max(1px, calc(1.2 * var(--u)));
+  background: currentColor; transform: scaleX(0); transform-origin: 0 50%; transition: transform .45s cubic-bezier(.2, .7, .2, 1);
+}
+@media (hover: hover) {
+  .case:hover .k-click::after, .case:focus-visible .k-click::after { transform: scaleX(1); }
+}
+.case:focus-visible { outline: 1px solid #fff; outline-offset: -4px; }
+
+/* Figma frame noise: monotone black, 12 % alpha — texture comes from site.js */
+.noise { position: fixed; inset: 0; pointer-events: none; z-index: 10; background-repeat: repeat; }
+
+.cities { display: contents; }
+
+/* ---------- phones ---------- */
+@media (max-width: 760px) {
+  .page { aspect-ratio: auto; display: flex; flex-direction: column; }
+  .sec { position: relative; top: auto; }
+
+  /* hero: the central 1100 design px of the Figma hero (logo + big plates) */
+  .hero { --u: calc(100cqw / 1100); --ox: -410; height: calc(1124 * var(--u)); overflow: hidden; }
+  .rect-218, .rect-219, .rect-220 { display: none; }
+
+  /* header / footer rows at a readable scale, anchored to the screen edges */
+  .hd { --s: .8; }
+  .hd-dot1, .hd-dot2, .hd-dot3, .hd-dot4 { width: 6px; height: 6px; top: 27px; }
+  .hd-dot1 { left: 16px; }
+  .hd-dot2 { left: 46px; }
+  .hd-dot3 { left: calc(100cqw - 16px - 36px); }
+  .hd-dot4 { left: calc(100cqw - 16px - 6px); }
+  .hd-gmail { left: 81px; top: 24px; width: calc(var(--w) * .8px); height: calc(var(--h) * .8px); }
+  .hd-inst { left: calc(100cqw - 16px - 98px); top: 25px; width: calc(var(--w) * .8px); height: calc(var(--h) * .8px); }
+  .hd-time { left: calc(50cqw - var(--w) * .31px); top: 20px; width: calc(var(--w) * .62px); height: calc(var(--h) * .62px); }
+
+  /* film-edge numbers: half-size row, clipped by the section */
+  .nums { width: calc(var(--w) * 200cqw / 1920); height: calc(var(--h) * 200cqw / 1920); }
+  .nums-hero { left: 8px; }
+
+  /* cases: square crop, bar overlaid near the bottom like the desktop */
+  .case { height: 112cqw; margin-top: 34px; }
+  .hero + .case { margin-top: 0; }
+  .case .media { left: 0; top: 0; width: 100%; height: 100%; }
+  .case .nums-top { left: 8px; top: 10px; }
+  .case .bar { left: 0; width: 100%; top: auto; bottom: 11.5%; height: 72px; }
+  .case .k { width: calc(var(--w) * 1px); height: calc(var(--h) * 1px); top: calc(100% - 11.5% - 72px + var(--row) + var(--dy) * 1px); }
+  .k-num, .k-dt, .k-click { --row: 2px; }
+  .k-name, .k-client, .k-brand, .k-year { --row: 26px; }
+  .k-num { left: 16px; }
+  .k-dt { left: 42px; }
+  .k-click { left: calc(100cqw - 16px - var(--w) * 1px); }
+  .k-name { left: 16px; }
+  .k-client { left: 52cqw; }
+  .k-brand { left: calc(52cqw + 44px); }
+  .k-year { left: calc(100cqw - 16px - var(--w) * 1px); }
+  .case .nums-bar { left: 8px; top: auto; bottom: calc(11.5% + 8px); }
+  .k-click::after { height: 1px; }
+
+  /* footer */
+  .foot { height: 150px; }
+  .cities { display: flex; justify-content: center; align-items: flex-start; gap: 22px; position: absolute; left: 0; right: 0; top: 46px; }
+  .cities .t { position: relative; left: auto; top: auto; width: calc(var(--w) * 1px); height: calc(var(--h) * 1px); margin-top: calc(var(--dy) * 1px); }
+  .foot .hd-dot1, .foot .hd-dot2, .foot .hd-dot3, .foot .hd-dot4 { top: auto; bottom: 25px; }
+  .foot .hd-gmail { top: auto; bottom: 22px; }
+  .foot .hd-inst { top: auto; bottom: 23px; }
+}
+@media (max-width: 350px) {
+  .hd-time { top: 46px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .k-click::after { transition: none; }
+}
