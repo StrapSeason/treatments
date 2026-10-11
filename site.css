@@ -27,8 +27,11 @@ h1.a { font-size: inherit; font-weight: inherit; }
 .slot { overflow: hidden; }
 /* lift the loops' pure black to a dark grey so every plate still reads as a rectangle, like the Figma's */
 .slot::after { content: ""; position: absolute; inset: 0; background: #1a1a1a; mix-blend-mode: lighten; pointer-events: none; }
-.slot video { display: block; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .6s ease; }
+/* the video overhangs the plate by 1px on every side: fractional plate sizes otherwise leave a hairline of the
+   grey placeholder along an edge; once a loop is live the plate itself turns the loops' dark grey too */
+.slot video { position: absolute; left: -1px; top: -1px; width: calc(100% + 2px); height: calc(100% + 2px); object-fit: cover; opacity: 0; transition: opacity .6s ease; }
 .slot video.on { opacity: 1; }
+.slot.live { background: #1a1a1a; }
 /* the logo sits over the loops: difference keeps it readable on both their black and their white */
 .logo { mix-blend-mode: difference; }
 svg.lines { display: block; overflow: visible; }

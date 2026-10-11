@@ -26,8 +26,8 @@
   slots.forEach((v, i) => {
     const name = pool[i % (pool.length || 1)]; if (!name) return;
     v.poster = `media/hero/${name}.jpg`;
-    v.addEventListener('loadeddata', () => v.classList.add('on'), { once: true });
-    if (still) { v.preload = 'metadata'; v.classList.add('on'); }
+    v.addEventListener('loadeddata', () => { v.classList.add('on'); v.parentElement.classList.add('live'); }, { once: true });
+    if (still) { v.preload = 'metadata'; v.classList.add('on'); v.parentElement.classList.add('live'); }
     v.src = `media/hero/${name}.${webm ? 'webm' : 'mp4'}`;
   });
 
