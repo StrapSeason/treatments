@@ -19,8 +19,12 @@
 
   // hero slots: a random loop from the pool in each of the six plates, a fresh shuffle on every visit
   const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const pool = (window.HERO_POOL || []).slice();
-  for (let i = pool.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [pool[i], pool[j]] = [pool[j], pool[i]]; }
+  // pool = robot loops (robo-*) and effects (fx-*), 2026-10-18: «гифки с роборукой, с эффектами». Each visit draws
+  // 4 robots + 2 effects in a fixed rhythm; the big plate (first slot) always gets a robot.
+  const shuffle = (a) => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  const all = (window.HERO_POOL || []).slice();
+  const robo = shuffle(all.filter((n) => n.startsWith('robo-'))), fx = shuffle(all.filter((n) => !n.startsWith('robo-')));
+  const pool = ['r', 'f', 'r', 'r', 'f', 'r'].map((k) => (k === 'r' ? robo : fx).shift() || (k === 'r' ? fx : robo).shift()).filter(Boolean);
   const slots = [...document.querySelectorAll('.slot video')];
   const webm = slots.length && slots[0].canPlayType('video/webm; codecs="vp9"');
   slots.forEach((v, i) => {
