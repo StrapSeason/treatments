@@ -43,6 +43,8 @@ svg.lines { display: block; overflow: visible; }
 .media { overflow: hidden; background: #111; }
 .media video, .media img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
 .bar { background: #000; }
+/* the director's name over the picture: difference, like the hero logo over its loops */
+.cname { mix-blend-mode: difference; pointer-events: none; }
 
 /* "click": a hairline draws under it on hover */
 .k-click::after {
@@ -109,6 +111,9 @@ svg.lines { display: block; overflow: visible; }
   .k-brand { left: calc(52cqw + 44px); }
   .k-year { left: calc(100cqw - 16px - var(--w) * 1px); }
   .case .nums-bar { left: 8px; top: auto; bottom: calc(11.5% + 8px); }
+  /* the name: one type size for all four (the longest, Victor Lyapakhin, ~87 % of the width), centred above the bar */
+  .case .cname { left: 50%; top: calc((88.5% - 72px) / 2); width: min(calc(var(--w) * .24px), 88cqw); height: auto;
+    aspect-ratio: var(--w) / var(--h); transform: translate(-50%, -50%); }
   .k-click::after { height: 1px; }
 
   /* footer */
