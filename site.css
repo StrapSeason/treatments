@@ -64,9 +64,18 @@ svg.lines { display: block; overflow: visible; }
   .page { aspect-ratio: auto; display: flex; flex-direction: column; }
   .sec { position: relative; top: auto; }
 
-  /* hero: the central 1100 design px of the Figma hero (logo + big plates) */
-  .hero { --u: calc(100cqw / 1100); --ox: -410; height: calc(1124 * var(--u)); overflow: hidden; }
-  .rect-218, .rect-219, .rect-220 { display: none; }
+  /* hero: the central 1100 design px of the Figma hero (logo + big plates), now one full screen (2026-10-18,
+     «давай блок стандартным сделаем — на весь экран»): the composition keeps its width-fitted scale and sits in
+     the middle of the screen; the three side plates come back above and below it; the film-edge row goes to the foot */
+  .hero { --u: calc(100cqw / 1100); --ox: -410; overflow: hidden;
+    height: 100vh; height: 100svh; min-height: calc(1124 * var(--u) + 120px);
+    --oy: max(56px, calc((100svh - 1124 * var(--u)) / 2)); }
+  .hero .a:not(.hd, .nums-hero, .rect-218, .rect-219, .rect-220) { top: calc(var(--y) * var(--u) + var(--oy)); }
+  /* (their --x/--y are inline styles, so the new places are set on left/top directly) */
+  .hero .a.rect-220 { left: calc((1296 + var(--ox)) * var(--u)); top: max(64px, calc(var(--oy) - 330 * var(--u))); }
+  .hero .a.rect-219 { left: calc((440 + var(--ox)) * var(--u)); top: calc(var(--oy) + 1090 * var(--u)); }
+  .hero .a.rect-218 { left: calc((1300 + var(--ox)) * var(--u)); top: calc(var(--oy) + 1170 * var(--u)); }
+  .hero .nums-hero { top: auto; bottom: 14px; }
 
   /* header / footer rows at a readable scale, anchored to the screen edges */
   .hd { --s: .8; }
