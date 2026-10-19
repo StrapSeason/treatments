@@ -100,16 +100,18 @@ svg.lines { display: block; overflow: visible; }
   .case .media { left: 0; top: 0; width: 100%; height: 100%; }
   .case .nums-top { left: 8px; top: 10px; }
   .case .bar { left: 0; width: 100%; top: auto; bottom: 11.5%; height: 72px; }
-  .case .k { width: calc(var(--w) * 1px); height: calc(var(--h) * 1px); top: calc(100% - 11.5% - 72px + var(--row) + var(--dy) * 1px); }
+  /* bar type 2 px smaller than the design's 14 px (2026-10-19 «уменьшить шрифт на черной полоске на 1–2 кегля»): --kf = 12/14 */
+  .case { --kf: .857; }
+  .case .k { width: calc(var(--w) * var(--kf) * 1px); height: calc(var(--h) * var(--kf) * 1px); top: calc(100% - 11.5% - 72px + var(--row) + var(--dy) * var(--kf) * 1px); }
   .k-num, .k-dt, .k-click { --row: 2px; }
-  .k-name, .k-client, .k-brand, .k-year { --row: 26px; }
+  .k-name, .k-client, .k-brand, .k-year { --row: 25px; }
   .k-num { left: 16px; }
-  .k-dt { left: 42px; }
-  .k-click { left: calc(100cqw - 16px - var(--w) * 1px); }
+  .k-dt { left: 39px; }
+  .k-click { left: calc(100cqw - 16px - var(--w) * var(--kf) * 1px); }
   .k-name { left: 16px; }
   .k-client { left: 52cqw; }
-  .k-brand { left: calc(52cqw + 44px); }
-  .k-year { left: calc(100cqw - 16px - var(--w) * 1px); }
+  .k-brand { left: calc(52cqw + 39px); }
+  .k-year { left: calc(100cqw - 16px - var(--w) * var(--kf) * 1px); }
   .case .nums-bar { left: 8px; top: auto; bottom: calc(11.5% + 8px); }
   /* the name: one type size for all four (the longest, Victor Lyapakhin, ~87 % of the width), centred above the bar */
   .case .cname { left: 50%; top: calc((88.5% - 72px) / 2); width: min(calc(var(--w) * .24px), 88cqw); height: auto;
