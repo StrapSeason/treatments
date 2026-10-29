@@ -66,14 +66,11 @@ svg.lines { display: block; overflow: visible; }
   .page { aspect-ratio: auto; display: flex; flex-direction: column; }
   .sec { position: relative; top: auto; }
 
-  /* Centre the original three-plate composition within the full-screen hero.
-     Lift only the title to the upper part of the main plate, preserving its video blend. */
+  /* A compact, title-only introduction on phones. */
   .hero { --u: calc(100cqw / 1100); --ox: -410; overflow: hidden;
-    height: 100vh; height: 100svh; min-height: calc(1124 * var(--u) + 120px);
-    --oy: max(56px, calc((100svh - 1124 * var(--u)) / 2)); }
-  .hero .a:not(.hd, .nums-hero) { top: calc(var(--y) * var(--u) + var(--oy)); }
-  .hero .a.logo { left: 50%; top: calc(var(--oy) + 240 * var(--u)); transform: translateX(-50%); }
-  .hero .rect-218, .hero .rect-219, .hero .rect-220 { display: none; }
+    height: clamp(220px, 36svh, 320px); min-height: 0; }
+  .hero .slot { display: none; }
+  .hero .a.logo { left: 50%; top: 50%; transform: translate(-50%, -50%); }
   .hero .nums-hero { top: auto; bottom: 14px; }
   /* header / footer rows at a readable scale, anchored to the screen edges */
   .hd { --s: .8; }
