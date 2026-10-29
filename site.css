@@ -73,12 +73,11 @@ svg.lines { display: block; overflow: visible; }
     height: 100vh; height: 100svh; min-height: calc(1124 * var(--u) + 120px);
     --oy: max(0px, calc((100svh - 1124 * var(--u)) / 2 - 150px)); }
   .hero .a:not(.hd, .nums-hero, .rect-218, .rect-219, .rect-220) { top: calc(var(--y) * var(--u) + var(--oy)); }
-  .hero .logo { top: 96px !important; }
   /* (their --x/--y are inline styles, so the new places are set on left/top directly) */
   .hero .a.rect-220 { left: calc((1296 + var(--ox)) * var(--u)); top: max(64px, calc(var(--oy) - 330 * var(--u))); }
   .hero .a.rect-219 { left: calc((440 + var(--ox)) * var(--u)); top: calc(var(--oy) + 1090 * var(--u)); }
   .hero .a.rect-218 { left: calc((1300 + var(--ox)) * var(--u)); top: calc(var(--oy) + 1170 * var(--u)); }
-  .hero .rect-218, .hero .rect-220 { display: none; }
+  .hero .rect-218, .hero .rect-219, .hero .rect-220 { display: none; }
   .hero .nums-hero { top: auto; bottom: 14px; }
 
   /* header / footer rows at a readable scale, anchored to the screen edges */
